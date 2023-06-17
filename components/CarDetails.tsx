@@ -5,6 +5,8 @@ import { Dialog } from "@headlessui/react";
 import { Fragment } from "react";
 import { Transition } from "@headlessui/react";
 import Image from "next/image";
+import { generateCarImageUrl, calculateCarRent } from "@/utils";
+
 interface CarDetailsProps {
   isOpen: boolean;
   closeModal: () => void;
@@ -24,7 +26,7 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25"></div>
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
           <div className="fixed inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
@@ -53,7 +55,7 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                   <div className="flex-1 flex flex-col gap-3">
                     <div className="relative w-full h-40 bg-pattern bg-cover bg-center rounded-lg">
                       <Image
-                        src="/hero.png"
+                        src={generateCarImageUrl(car)}
                         alt="car model"
                         fill
                         priority
@@ -63,7 +65,7 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                     <div className="flex gap-3">
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                         <Image
-                          src="/hero.png"
+                          src={generateCarImageUrl(car, "29")}
                           alt="car model"
                           fill
                           priority
@@ -72,7 +74,7 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                       </div>
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                         <Image
-                          src="/hero.png"
+                          src={generateCarImageUrl(car, "33")}
                           alt="car model"
                           fill
                           priority
@@ -81,7 +83,7 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                       </div>
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                         <Image
-                          src="/hero.png"
+                          src={generateCarImageUrl(car, "13")}
                           alt="car model"
                           fill
                           priority
@@ -103,7 +105,9 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                           <h4 className="text-grey capitalize">
                             {key.split("_").join(" ")}
                           </h4>
-                          <p className="">{value}</p>
+                          <p className="text-black-100 font-semibold">
+                            {value}
+                          </p>
                         </div>
                       ))}
                     </div>

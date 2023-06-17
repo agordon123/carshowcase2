@@ -1,30 +1,28 @@
-"use client"
+"use client";
 import { Fragment, useState } from "react";
 import { SearchManufacturerProps } from "@/types";
 import { Combobox, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { manufacturers } from "@/constants";
 
-
-
 const SearchManufacturer = ({
-  manufacturer,
-  setManufacturer,
+  selected,
+  setSelected,
 }: SearchManufacturerProps) => {
-    const [query, setQuery] = useState("");
-    const filteredManufacturers =
-      query === ""
-        ? manufacturers
-        : manufacturers.filter((item) =>
-            item
-              .toLowerCase()
-              .replace(/\s+g/, "")
-              .includes(query.toLowerCase().replace(/\s+g/,""))
-          );
+  const [query, setQuery] = useState("");
+  const filteredManufacturers =
+    query === ""
+      ? manufacturers
+      : manufacturers.filter((item) =>
+          item
+            .toLowerCase()
+            .replace(/\s+g/, "")
+            .includes(query.toLowerCase().replace(/\s+g/, ""))
+        );
 
   return (
     <div className="search-manufacturer">
-      <Combobox>
+      <Combobox value={selected} onChange={setSelected}>
         <div className="relative w-full">
           <Combobox.Button className="absolute top-[14px]">
             <Image

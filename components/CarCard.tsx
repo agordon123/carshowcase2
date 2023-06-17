@@ -3,7 +3,7 @@
 import { CarProps } from "@/types";
 import Image from "next/image";
 import { CustomButton } from "@/components";
-import { calculateCarRent } from "@/utils";
+import { calculateCarRent, generateCarImageUrl } from "@/utils";
 import { useState } from "react";
 import CarDetails from "./CarDetails";
 interface CarCardProps {
@@ -24,11 +24,12 @@ const CarCard = ({ car }: CarCardProps) => {
       </div>
       <p className="flex mt-6 text-[32px] font-extrabold">
         <span className="self-start-text-[14px] font-semibold">$</span>
-        <span className="self-start text-[14px] font-medium">{carRent}</span>
+        {carRent}
+        <span className="self-start text-[14px] font-medium">/day</span>
       </p>
       <div className="relative w-full h-40 my-3 object-contain">
         <Image
-          src="/hero.png"
+          src={generateCarImageUrl(car)}
           alt="car model"
           fill
           priority
@@ -62,7 +63,6 @@ const CarCard = ({ car }: CarCardProps) => {
         <div className="car-card__btn-container">
           <CustomButton
             btnType="button"
-            text="Open"
             title="View More"
             rightIcon="/right-arrow.svg"
             containerStyles="w-full py-[16px]"
